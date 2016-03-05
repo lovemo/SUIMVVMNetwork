@@ -1,15 +1,15 @@
 //
-//  MVVMStore.m
+//  SMKStore.m
 //  MVVMFramework
 //
 //  Created by yuantao on 16/1/24.
 //  Copyright © 2016年 momo. All rights reserved.
 //
 
-#import "MVVMStore.h"
+#import "SMKStore.h"
 #import "YTKKeyValueStore.h"
 
-@implementation MVVMStoreItem
+@implementation SMKStoreItem
 
 - (NSString *)description {
     return [NSString stringWithFormat:@"id=%@, value=%@, timeStamp=%@", _itemId, _itemObject, _createdTime];
@@ -17,11 +17,11 @@
 
 @end
 
-@interface MVVMStore ()
+@interface SMKStore ()
 @property (nonatomic, strong) YTKKeyValueStore *ytk_store;
 @end
 
-@implementation MVVMStore
+@implementation SMKStore
 
 static id _instace;
 
@@ -112,10 +112,10 @@ static id _instace;
     return [self.ytk_store getObjectById:objectId fromTable:tableName];
 }
 
-- (MVVMStoreItem *)db_getStoreItemById:(NSString *)objectId fromTable:(NSString *)tableName {
+- (SMKStoreItem *)db_getStoreItemById:(NSString *)objectId fromTable:(NSString *)tableName {
     YTKKeyValueItem *item = [self.ytk_store getYTKKeyValueItemById:objectId fromTable:tableName];
     
-    MVVMStoreItem *storeItem = [[MVVMStoreItem alloc]init];
+    SMKStoreItem *storeItem = [[SMKStoreItem alloc]init];
     storeItem.itemId = item.itemId;
     storeItem.itemObject = item.itemObject;
     storeItem.createdTime = item.createdTime;

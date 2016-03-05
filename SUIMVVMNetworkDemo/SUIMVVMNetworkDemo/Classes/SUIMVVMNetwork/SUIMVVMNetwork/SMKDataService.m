@@ -1,19 +1,19 @@
 //
-//  BQDataService.m
+//  SMKDataService.m
 //  MVVMFramework
 //
 //  Created by Mac on 16/1/22.
 //  Copyright © 2016年 momo. All rights reserved.
 //
 
-#import "MVVMDataService.h"
+#import "SMKDataService.h"
 
 static id dataObj;
 
-@implementation MVVMDataService
+@implementation SMKDataService
 
-+ (void)getWithUrl:(NSString *)url param:(id)param cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy modelClass:(Class)modelClass responseBlock:(responseBlock)responseDataBlock {
-    [MVVMHttp get:url params:param cachePolicy:cachePolicy success:^(id responseObj) {
++ (void)get:(NSString *)url param:(id)param cachePolicy:(SMKHttpRequestCachePolicy)cachePolicy modelClass:(Class)modelClass responseBlock:(responseBlock)responseDataBlock {
+    [SMKHttp get:url params:param cachePolicy:cachePolicy success:^(id responseObj) {
         //数组、字典转化为模型数组
         
         dataObj = [self modelTransformationWithResponseObj:responseObj modelClass:modelClass];
@@ -25,9 +25,9 @@ static id dataObj;
     }];
 }
 
-+ (void)postWithUrl:(NSString *)url param:(id)param cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy modelClass:(Class)modelClass responseBlock:(responseBlock)responseDataBlock {
++ (void)post:(NSString *)url param:(id)param cachePolicy:(SMKHttpRequestCachePolicy)cachePolicy modelClass:(Class)modelClass responseBlock:(responseBlock)responseDataBlock {
     
-    [MVVMHttp post:url params:param cachePolicy:cachePolicy success:^(id responseObj) {
+    [SMKHttp post:url params:param cachePolicy:cachePolicy success:^(id responseObj) {
         
         dataObj = [self modelTransformationWithResponseObj:responseObj modelClass:modelClass];
         responseDataBlock(dataObj, nil);
@@ -37,9 +37,9 @@ static id dataObj;
     }];
 }
 
-+ (void)putWithUrl:(NSString *)url param:(id)param modelClass:(Class)modelClass responseBlock:(responseBlock)responseDataBlock {
++ (void)put:(NSString *)url param:(id)param modelClass:(Class)modelClass responseBlock:(responseBlock)responseDataBlock {
     
-    [MVVMHttp put:url params:param success:^(id responseObj) {
+    [SMKHttp put:url params:param success:^(id responseObj) {
         
         dataObj = [self modelTransformationWithResponseObj:responseObj modelClass:modelClass];
         responseDataBlock(dataObj, nil);
@@ -51,7 +51,7 @@ static id dataObj;
 
 + (void)deleteWithUrl:(NSString *)url param:(id)param modelClass:(Class)modelClass responseBlock:(responseBlock)responseDataBlock {
     
-    [MVVMHttp delete:url params:param success:^(id responseObj) {
+    [SMKHttp deleteWithUrl:url params:param success:^(id responseObj) {
         
         dataObj = [self modelTransformationWithResponseObj:responseObj modelClass:modelClass];
         responseDataBlock(dataObj, nil);

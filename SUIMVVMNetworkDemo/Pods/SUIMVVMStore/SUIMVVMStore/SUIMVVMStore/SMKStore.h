@@ -1,5 +1,5 @@
 //
-//  MVVMStore.h
+//  SMKStore.h
 //  MVVMFramework
 //
 //  Created by yuantao on 16/1/24.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MVVMStoreItem : NSObject
+@interface SMKStoreItem : NSObject
 
 @property (copy, nonatomic) NSString *itemId;
 @property (strong, nonatomic) id itemObject;
@@ -16,7 +16,7 @@
 
 @end
 
-@interface MVVMStore : NSObject
+@interface SMKStore : NSObject
 
 + (instancetype)sharedStore;
 
@@ -81,7 +81,7 @@
 
 - (id)db_getObjectById:(NSString *)objectId fromTable:(NSString *)tableName;
 
-- (MVVMStoreItem *)db_getStoreItemById:(NSString *)objectId fromTable:(NSString *)tableName;
+- (SMKStoreItem *)db_getStoreItemById:(NSString *)objectId fromTable:(NSString *)tableName;
 
 - (void)db_putString:(NSString *)string withId:(NSString *)stringId intoTable:(NSString *)tableName;
 

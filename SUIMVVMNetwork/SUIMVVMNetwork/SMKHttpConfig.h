@@ -1,5 +1,5 @@
 //
-//  MVVMHttpConfig.h
+//  SMKHttpConfig.h
 //  SUIMVVMDemo
 //
 //  Created by yuantao on 16/3/2.
@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MVVMSingleton.h"
+#import "SMKSingleton.h"
 
-@interface MVVMHttpConfig : NSObject
+@interface SMKHttpConfig : NSObject
 
-MVVMSingletonH(Config)
+SMKSingletonH(Config)
 
 /**
  *  网络是否连通

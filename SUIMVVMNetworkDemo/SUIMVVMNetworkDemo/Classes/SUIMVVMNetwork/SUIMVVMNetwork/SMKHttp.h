@@ -1,5 +1,5 @@
 //
-//  BQViewModel.h
+//  SMKHttp.h
 //  DevelopFramework
 //
 //  Created by momo on 15/12/23.
@@ -30,24 +30,24 @@ typedef void (^responseBlock)(id dataObj, NSError *error);
 typedef void (^progressBlock)(NSProgress * progress);
 
 
-typedef NS_ENUM(NSUInteger, MVVMHttpRequestCachePolicy){
+typedef NS_ENUM(NSUInteger, SMKHttpRequestCachePolicy){
     /** 不作任何处理，只请求数据 */
-    MVVMHttpReturnDefault = 0,
+    SMKHttpReturnDefault = 0,
     /** 有缓存就先返回缓存，同步请求数据 */
-    MVVMHttpReturnCacheDataThenLoad,
+    SMKHttpReturnCacheDataThenLoad,
     /** 忽略缓存，重新请求 */
-    MVVMHttpReloadIgnoringLocalCacheData,
+    SMKHttpReloadIgnoringLocalCacheData,
     /** 有缓存就用缓存，没有缓存就重新请求(用于数据不变时) */
-    MVVMHttpReturnCacheDataElseLoad,
+    SMKHttpReturnCacheDataElseLoad,
     /** 有缓存就用缓存，没有缓存就不发请求，当做请求出错处理（用于离线模式）*/
-    MVVMHttpReturnCacheDataDontLoad
+    SMKHttpReturnCacheDataDontLoad
 };
 
 #pragma mark - 定义请求工具类
 
-@class MVVMHttpFileConfig;
+@class SMKHttpFileConfig;
 
-@interface MVVMHttp : NSObject
+@interface SMKHttp : NSObject
 
 /**
  *  请求超时时间
@@ -57,7 +57,7 @@ typedef NS_ENUM(NSUInteger, MVVMHttpRequestCachePolicy){
 /**
  *  创建单例对象
  */
-+ (MVVMHttp *)defaultMVVMHttp;
++ (instancetype)defaultHttp;
 
 /**
  *  移除所有缓存
@@ -90,7 +90,7 @@ typedef NS_ENUM(NSUInteger, MVVMHttpRequestCachePolicy){
  */
 + (void)get:(NSString *)url
      params:(NSDictionary *)params
-cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy
+cachePolicy:(SMKHttpRequestCachePolicy)cachePolicy
     success:(requestSuccessBlock)successHandler
     failure:(requestFailureBlock)failureHandler;
 
@@ -99,7 +99,7 @@ cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy
  */
 + (void)post:(NSString *)url
       params:(NSDictionary *)params
- cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy
+ cachePolicy:(SMKHttpRequestCachePolicy)cachePolicy
      success:(requestSuccessBlock)successHandler
      failure:(requestFailureBlock)failureHandler;
 
@@ -114,10 +114,10 @@ cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy
 /**
  *  DELETE请求
  */
-+ (void)delete:(NSString *)url
-params:(NSDictionary *)params
-success:(requestSuccessBlock)successHandler
-failure:(requestFailureBlock)failureHandler;
++ (void)deleteWithUrl:(NSString *)url
+    params:(NSDictionary *)params
+    success:(requestSuccessBlock)successHandler
+    failure:(requestFailureBlock)failureHandler;
 
 /**
  *  下载文件，监听下载进度
@@ -130,7 +130,7 @@ successAndProgress:(progressBlock)progressHandler
  *  文件上传
  */
 + (void)upload:(NSString *)url
-        params:(NSDictionary *)params fileConfig:(MVVMHttpFileConfig *)fileConfig
+        params:(NSDictionary *)params fileConfig:(SMKHttpFileConfig *)fileConfig
        success:(requestSuccessBlock)successHandler
        failure:(requestFailureBlock)failureHandler;
 
@@ -139,7 +139,7 @@ successAndProgress:(progressBlock)progressHandler
  */
 + (void)upload:(NSString *)url
         params:(NSDictionary *)params
-    fileConfig:(MVVMHttpFileConfig *)fileConfig
+    fileConfig:(SMKHttpFileConfig *)fileConfig
 successAndProgress:(progressBlock)progressHandler
       complete:(responseBlock)completionHandler;
 
@@ -149,7 +149,7 @@ successAndProgress:(progressBlock)progressHandler
 /**
  *  用来封装上文件数据的模型类
  */
-@interface MVVMHttpFileConfig : NSObject
+@interface SMKHttpFileConfig : NSObject
 
 /**
  *  文件数据

@@ -17,12 +17,12 @@ PODS:
   - FMDB (2.6):
     - FMDB/standard (= 2.6)
   - FMDB/standard (2.6)
-  - SUIMVVMStore (0.0.4):
-    - SUIMVVMStore/SUIMVVMStore (= 0.0.4)
-    - SUIMVVMStore/YTKKeyValueStore (= 0.0.4)
-  - SUIMVVMStore/SUIMVVMStore (0.0.4):
+  - SUIMVVMStore (0.0.8):
+    - SUIMVVMStore/SUIMVVMStore (= 0.0.8)
+    - SUIMVVMStore/YTKKeyValueStore (= 0.0.8)
+  - SUIMVVMStore/SUIMVVMStore (0.0.8):
     - SUIMVVMStore/YTKKeyValueStore
-  - SUIMVVMStore/YTKKeyValueStore (0.0.4):
+  - SUIMVVMStore/YTKKeyValueStore (0.0.8):
     - FMDB
 
 DEPENDENCIES:
@@ -32,6 +32,6 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   FMDB: c1968bab3ab0aed38f66cb778ae1e7fa9a652b6e
-  SUIMVVMStore: bc8e92c032a517823a7a14e401a6923dca81793b
+  SUIMVVMStore: a393af1cc70ecec19e571791e7f143e023f21fac
 
 COCOAPODS: 0.39.0

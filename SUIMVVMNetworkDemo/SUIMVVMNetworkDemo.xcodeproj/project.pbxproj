@@ -13,9 +13,9 @@
 		34E293F91C86AE0F005B8893 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34E293ED1C86AE0F005B8893 /* ViewController.m */; };
 		34E293FA1C86AE0F005B8893 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34E293F01C86AE0F005B8893 /* AppDelegate.m */; };
 		34E293FB1C86AE0F005B8893 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 34E293F11C86AE0F005B8893 /* main.m */; };
-		34E2940B1C86B124005B8893 /* MVVMDataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 34E294051C86B124005B8893 /* MVVMDataService.m */; };
-		34E2940C1C86B124005B8893 /* MVVMHttp.m in Sources */ = {isa = PBXBuildFile; fileRef = 34E294071C86B124005B8893 /* MVVMHttp.m */; };
-		34E2940D1C86B124005B8893 /* MVVMHttpConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 34E294091C86B124005B8893 /* MVVMHttpConfig.m */; };
+		34E2940B1C86B124005B8893 /* SMKDataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 34E294051C86B124005B8893 /* SMKDataService.m */; };
+		34E2940C1C86B124005B8893 /* SMKHttp.m in Sources */ = {isa = PBXBuildFile; fileRef = 34E294071C86B124005B8893 /* SMKHttp.m */; };
+		34E2940D1C86B124005B8893 /* SMKHttpConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 34E294091C86B124005B8893 /* SMKHttpConfig.m */; };
 		8B475518922F2E9C810FDE6B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1B86516EB9098C28815341 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -30,14 +30,14 @@
 		34E293EF1C86AE0F005B8893 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		34E293F01C86AE0F005B8893 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		34E293F11C86AE0F005B8893 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		34E294021C86B124005B8893 /* MVVMNetworkPublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MVVMNetworkPublic.h; sourceTree = "<group>"; };
-		34E294041C86B124005B8893 /* MVVMDataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MVVMDataService.h; sourceTree = "<group>"; };
-		34E294051C86B124005B8893 /* MVVMDataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MVVMDataService.m; sourceTree = "<group>"; };
-		34E294061C86B124005B8893 /* MVVMHttp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MVVMHttp.h; sourceTree = "<group>"; };
-		34E294071C86B124005B8893 /* MVVMHttp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MVVMHttp.m; sourceTree = "<group>"; };
-		34E294081C86B124005B8893 /* MVVMHttpConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MVVMHttpConfig.h; sourceTree = "<group>"; };
-		34E294091C86B124005B8893 /* MVVMHttpConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MVVMHttpConfig.m; sourceTree = "<group>"; };
-		34E2940A1C86B124005B8893 /* MVVMSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MVVMSingleton.h; sourceTree = "<group>"; };
+		34E294021C86B124005B8893 /* SMKNetworkPublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMKNetworkPublic.h; sourceTree = "<group>"; };
+		34E294041C86B124005B8893 /* SMKDataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMKDataService.h; sourceTree = "<group>"; };
+		34E294051C86B124005B8893 /* SMKDataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMKDataService.m; sourceTree = "<group>"; };
+		34E294061C86B124005B8893 /* SMKHttp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMKHttp.h; sourceTree = "<group>"; };
+		34E294071C86B124005B8893 /* SMKHttp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMKHttp.m; sourceTree = "<group>"; };
+		34E294081C86B124005B8893 /* SMKHttpConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMKHttpConfig.h; sourceTree = "<group>"; };
+		34E294091C86B124005B8893 /* SMKHttpConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMKHttpConfig.m; sourceTree = "<group>"; };
+		34E2940A1C86B124005B8893 /* SMKSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMKSingleton.h; sourceTree = "<group>"; };
 		38672A223ACC4EB37318F09E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		5B1B86516EB9098C28815341 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C86D775B2C230AF47F786E0B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -133,7 +133,7 @@
 		34E294011C86B124005B8893 /* SUIMVVMNetwork */ = {
 			isa = PBXGroup;
 			children = (
-				34E294021C86B124005B8893 /* MVVMNetworkPublic.h */,
+				34E294021C86B124005B8893 /* SMKNetworkPublic.h */,
 				34E294031C86B124005B8893 /* SUIMVVMNetwork */,
 			);
 			path = SUIMVVMNetwork;
@@ -142,13 +142,13 @@
 		34E294031C86B124005B8893 /* SUIMVVMNetwork */ = {
 			isa = PBXGroup;
 			children = (
-				34E294041C86B124005B8893 /* MVVMDataService.h */,
-				34E294051C86B124005B8893 /* MVVMDataService.m */,
-				34E294061C86B124005B8893 /* MVVMHttp.h */,
-				34E294071C86B124005B8893 /* MVVMHttp.m */,
-				34E294081C86B124005B8893 /* MVVMHttpConfig.h */,
-				34E294091C86B124005B8893 /* MVVMHttpConfig.m */,
-				34E2940A1C86B124005B8893 /* MVVMSingleton.h */,
+				34E294041C86B124005B8893 /* SMKDataService.h */,
+				34E294051C86B124005B8893 /* SMKDataService.m */,
+				34E294061C86B124005B8893 /* SMKHttp.h */,
+				34E294071C86B124005B8893 /* SMKHttp.m */,
+				34E294081C86B124005B8893 /* SMKHttpConfig.h */,
+				34E294091C86B124005B8893 /* SMKHttpConfig.m */,
+				34E2940A1C86B124005B8893 /* SMKSingleton.h */,
 			);
 			path = SUIMVVMNetwork;
 			sourceTree = "<group>";
@@ -284,9 +284,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				34E293FA1C86AE0F005B8893 /* AppDelegate.m in Sources */,
-				34E2940D1C86B124005B8893 /* MVVMHttpConfig.m in Sources */,
-				34E2940C1C86B124005B8893 /* MVVMHttp.m in Sources */,
-				34E2940B1C86B124005B8893 /* MVVMDataService.m in Sources */,
+				34E2940D1C86B124005B8893 /* SMKHttpConfig.m in Sources */,
+				34E2940C1C86B124005B8893 /* SMKHttp.m in Sources */,
+				34E2940B1C86B124005B8893 /* SMKDataService.m in Sources */,
 				34E293FB1C86AE0F005B8893 /* main.m in Sources */,
 				34E293F91C86AE0F005B8893 /* ViewController.m in Sources */,
 			);

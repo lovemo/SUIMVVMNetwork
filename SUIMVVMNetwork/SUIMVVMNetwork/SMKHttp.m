@@ -1,15 +1,15 @@
 //
-//  BQViewModel.h
+//  SMKHttp.h
 //  DevelopFramework
 //
 //  Created by momo on 15/12/23.
 //  Copyright © 2015年 teason. All rights reserved.
 //
 
-#import "MVVMHttp.h"
+#import "SMKHttp.h"
 #import "AFNetworking.h"
-#import "MVVMStore.h"
-#import "MVVMHttpConfig.h"
+#import <SMKStorePublic.h>
+#import "SMKHttpConfig.h"
 
 #ifdef DEBUG
 #define BQLog(...) NSLog(__VA_ARGS__)
@@ -19,26 +19,26 @@
 
 #define kPathOfCaches [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject]
 
-static NSString * const MVVMRequestCache = @"MVVMRequestCache.sqlite";
+static NSString * const SMKRequestCache = @"SMKRequestCache.sqlite";
 
-typedef NS_ENUM(NSUInteger, MVVMHttpRequestType) {
-    MVVMHttpRequestTypeGET = 0,
-    MVVMHttpRequestTypePOST
+typedef NS_ENUM(NSUInteger, SMKHttpRequestType) {
+    SMKHttpRequestTypeGET = 0,
+    SMKHttpRequestTypePOST
 };
 
 
-@interface MVVMHttp ()
+@interface SMKHttp ()
 @property (nonatomic, strong) AFHTTPSessionManager *manager;
 @property (nonatomic, strong) UIAlertView *alert;
-@property (nonatomic, strong) MVVMStore *store;
+@property (nonatomic, strong) SMKStore *store;
 @end
 
-@implementation MVVMHttp
+@implementation SMKHttp
 
-- (MVVMStore *)store {
+- (SMKStore *)store {
     if (_store == nil) {
-        _store = [[MVVMStore alloc] init];
-        NSString *cachesPath = [kPathOfCaches stringByAppendingPathComponent:MVVMRequestCache];
+        _store = [[SMKStore alloc] init];
+        NSString *cachesPath = [kPathOfCaches stringByAppendingPathComponent:SMKRequestCache];
         [_store db_initDBWithPath:cachesPath];
     }
     return _store;
@@ -60,8 +60,8 @@ typedef NS_ENUM(NSUInteger, MVVMHttpRequestType) {
 
 #pragma mark -------------------- public --------------------
 
-+ (MVVMHttp *)defaultMVVMHttp {
-    static MVVMHttp *instance = nil;
++ (instancetype)defaultHttp {
+    static SMKHttp *instance = nil;
     static dispatch_once_t predicate;
     dispatch_once(&predicate, ^{
         instance = [[self alloc] init];
@@ -70,11 +70,11 @@ typedef NS_ENUM(NSUInteger, MVVMHttpRequestType) {
 }
 
 + (void)removeAllCaches {
-    [[MVVMHttp defaultMVVMHttp].store db_clearTable:MVVMRequestCache];
+    [[SMKHttp defaultHttp].store db_clearTable:SMKRequestCache];
 }
 
 + (void)cancelAllOperations {
-    [[MVVMHttp defaultMVVMHttp].manager.operationQueue cancelAllOperations];
+    [[SMKHttp defaultHttp].manager.operationQueue cancelAllOperations];
 }
 
 + (void)get:(NSString *)url
@@ -82,7 +82,7 @@ typedef NS_ENUM(NSUInteger, MVVMHttpRequestType) {
     success:(requestSuccessBlock)successHandler
     failure:(requestFailureBlock)failureHandler
 {
-    [MVVMHttp requestMethod:MVVMHttpRequestTypeGET url:url params:params cachePolicy:MVVMHttpReloadIgnoringLocalCacheData success:successHandler failure:failureHandler];
+    [SMKHttp requestMethod:SMKHttpRequestTypeGET url:url params:params cachePolicy:SMKHttpReloadIgnoringLocalCacheData success:successHandler failure:failureHandler];
 }
 
 + (void)post:(NSString *)url
@@ -90,36 +90,36 @@ typedef NS_ENUM(NSUInteger, MVVMHttpRequestType) {
      success:(requestSuccessBlock)successHandler
      failure:(requestFailureBlock)failureHandler
 {
-    [MVVMHttp requestMethod:MVVMHttpRequestTypePOST url:url params:params cachePolicy:MVVMHttpReloadIgnoringLocalCacheData success:successHandler failure:failureHandler];
+    [SMKHttp requestMethod:SMKHttpRequestTypePOST url:url params:params cachePolicy:SMKHttpReloadIgnoringLocalCacheData success:successHandler failure:failureHandler];
 }
 
 + (void)get:(NSString *)url
      params:(NSDictionary *)params
-cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy
+cachePolicy:(SMKHttpRequestCachePolicy)cachePolicy
     success:(requestSuccessBlock)successHandler
     failure:(requestFailureBlock)failureHandler
 {
-    [MVVMHttp requestMethod:MVVMHttpRequestTypeGET url:url params:params cachePolicy:cachePolicy success:successHandler failure:failureHandler];
+    [SMKHttp requestMethod:SMKHttpRequestTypeGET url:url params:params cachePolicy:cachePolicy success:successHandler failure:failureHandler];
 }
 
 + (void)post:(NSString *)url
       params:(NSDictionary *)params
- cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy
+ cachePolicy:(SMKHttpRequestCachePolicy)cachePolicy
      success:(requestSuccessBlock)successHandler
      failure:(requestFailureBlock)failureHandler
 {
-    [MVVMHttp requestMethod:MVVMHttpRequestTypePOST url:url params:params cachePolicy:cachePolicy success:successHandler failure:failureHandler];
+    [SMKHttp requestMethod:SMKHttpRequestTypePOST url:url params:params cachePolicy:cachePolicy success:successHandler failure:failureHandler];
 }
 
 + (void)put:(NSString *)url params:(NSDictionary *)params success:(requestSuccessBlock)successHandler failure:(requestFailureBlock)failureHandler {
     
-    if (![MVVMHttpConfig sharedConfig].reachable) {
+    if (![SMKHttpConfig sharedConfig].reachable) {
         successHandler(nil);
         failureHandler(nil);
         return;
     }
     
-    [[MVVMHttp defaultMVVMHttp].manager PUT:url parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [[SMKHttp defaultHttp].manager PUT:url parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         successHandler(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureHandler(error);
@@ -127,15 +127,15 @@ cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy
     
 }
 
-+ (void)delete:(NSString *)url params:(NSDictionary *)params success:(requestSuccessBlock)successHandler failure:(requestFailureBlock)failureHandler {
++ (void)deleteWithUrl:(NSString *)url params:(NSDictionary *)params success:(requestSuccessBlock)successHandler failure:(requestFailureBlock)failureHandler {
     
-    if (![MVVMHttpConfig sharedConfig].reachable) {
+    if (![SMKHttpConfig sharedConfig].reachable) {
         successHandler(nil);
         failureHandler(nil);
         return;
     }
     
-    [[MVVMHttp defaultMVVMHttp].manager DELETE:url parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [[SMKHttp defaultHttp].manager DELETE:url parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         successHandler(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureHandler(error);
@@ -148,7 +148,7 @@ cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy
  */
 + (void)download:(NSString *)url successAndProgress:(progressBlock)progressHandler complete:(responseBlock)completionHandler {
     
-    if (![MVVMHttpConfig sharedConfig].reachable) {
+    if (![SMKHttpConfig sharedConfig].reachable) {
         progressHandler(nil);
         completionHandler(nil, nil);
         return;
@@ -183,15 +183,15 @@ cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy
  *  @param failure 请求失败后的回调
  *  无上传进度监听
  */
-+ (void)upload:(NSString *)url params:(NSDictionary *)params fileConfig:(MVVMHttpFileConfig *)fileConfig success:(requestSuccessBlock)successHandler failure:(requestFailureBlock)failureHandler {
++ (void)upload:(NSString *)url params:(NSDictionary *)params fileConfig:(SMKHttpFileConfig *)fileConfig success:(requestSuccessBlock)successHandler failure:(requestFailureBlock)failureHandler {
     
-    if (![MVVMHttpConfig sharedConfig].reachable) {
+    if (![SMKHttpConfig sharedConfig].reachable) {
         successHandler(nil);
         failureHandler(nil);
         return;
     }
     
-    [[MVVMHttp defaultMVVMHttp].manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [[SMKHttp defaultHttp].manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
         [formData appendPartWithFileData:fileConfig.fileData name:fileConfig.name fileName:fileConfig.fileName mimeType:fileConfig.mimeType];
     } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -208,9 +208,9 @@ cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy
 /**
  上传文件，监听上传进度
  */
-+ (void)upload:(NSString *)url params:(NSDictionary *)params fileConfig:(MVVMHttpFileConfig *)fileConfig successAndProgress:(progressBlock)progressHandler complete:(responseBlock)completionHandler {
++ (void)upload:(NSString *)url params:(NSDictionary *)params fileConfig:(SMKHttpFileConfig *)fileConfig successAndProgress:(progressBlock)progressHandler complete:(responseBlock)completionHandler {
     
-    if (![MVVMHttpConfig sharedConfig].reachable) {
+    if (![SMKHttpConfig sharedConfig].reachable) {
         progressHandler(nil);
         completionHandler(nil, nil);
         return;
@@ -251,15 +251,15 @@ cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy
 
 #pragma mark -------------------- private --------------------
 
-+ (void)requestMethod:(MVVMHttpRequestType)requestType
++ (void)requestMethod:(SMKHttpRequestType)requestType
                   url:(NSString *)url
                params:(NSDictionary *)params
-          cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy
+          cachePolicy:(SMKHttpRequestCachePolicy)cachePolicy
               success:(requestSuccessBlock)successHandler
               failure:(requestFailureBlock)failureHandler
 {
-    if (cachePolicy == MVVMHttpReturnDefault) {
-        [MVVMHttp requestMethod:requestType url:url params:params cachePolicy:MVVMHttpReturnDefault tableName:nil cacheKey:nil success:successHandler failure:failureHandler];
+    if (cachePolicy == SMKHttpReturnDefault) {
+        [SMKHttp requestMethod:requestType url:url params:params cachePolicy:SMKHttpReturnDefault tableName:nil cacheKey:nil success:successHandler failure:failureHandler];
         return;
     }
     NSString *cacheKey = url;
@@ -273,28 +273,28 @@ cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy
     NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"[]{} // / : . @（#%-*+=_）\\|~(＜＞$%^&*)_+  { } " " : , “” " " \r \n  \" \"  "];
     NSString *cacheKeyUrl = [[cacheKey componentsSeparatedByCharactersInSet: set]componentsJoinedByString:@""];
     
-    [[MVVMHttp defaultMVVMHttp].store db_createTableWithName:cacheKeyUrl];
-    id object = [[MVVMHttp defaultMVVMHttp].store db_getObjectById:cacheKey fromTable:cacheKeyUrl];
+    [[SMKHttp defaultHttp].store db_createTableWithName:cacheKeyUrl];
+    id object = [[SMKHttp defaultHttp].store db_getObjectById:cacheKey fromTable:cacheKeyUrl];
     
     switch (cachePolicy) {
-        case MVVMHttpReturnCacheDataThenLoad: { // 先返回缓存，同时请求
+        case SMKHttpReturnCacheDataThenLoad: { // 先返回缓存，同时请求
             if (object) {
                 successHandler(object);
             }
             break;
         }
-        case MVVMHttpReloadIgnoringLocalCacheData: { // 忽略本地缓存直接请求
+        case SMKHttpReloadIgnoringLocalCacheData: { // 忽略本地缓存直接请求
             // 不做处理，直接请求
             break;
         }
-        case MVVMHttpReturnCacheDataElseLoad: { // 有缓存就返回缓存，没有就请求
+        case SMKHttpReturnCacheDataElseLoad: { // 有缓存就返回缓存，没有就请求
             if (object) { // 有缓存
                 successHandler(object);
                 return ;
             }
             break;
         }
-        case MVVMHttpReturnCacheDataDontLoad: { // 有缓存就返回缓存,从不请求（用于没有网络）
+        case SMKHttpReturnCacheDataDontLoad: { // 有缓存就返回缓存,从不请求（用于没有网络）
             if (object) { // 有缓存
                 successHandler(object);
             }
@@ -304,32 +304,32 @@ cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy
             break;
         }
     }
-    [MVVMHttp requestMethod:requestType url:url params:params cachePolicy:MVVMHttpReloadIgnoringLocalCacheData tableName:cacheKeyUrl cacheKey:cacheKey success:successHandler failure:failureHandler];
+    [SMKHttp requestMethod:requestType url:url params:params cachePolicy:SMKHttpReloadIgnoringLocalCacheData tableName:cacheKeyUrl cacheKey:cacheKey success:successHandler failure:failureHandler];
 }
 
-+ (void)requestMethod:(MVVMHttpRequestType)requestType
++ (void)requestMethod:(SMKHttpRequestType)requestType
                   url:(NSString *)url
                params:(NSDictionary *)params
-          cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy
+          cachePolicy:(SMKHttpRequestCachePolicy)cachePolicy
             tableName:(NSString *)tableName
              cacheKey:(NSString *)cacheKey
               success:(requestSuccessBlock)successHandler
               failure:(requestFailureBlock)failureHandler
 {
     
-    [[MVVMHttp defaultMVVMHttp].manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
-    [MVVMHttp defaultMVVMHttp].manager.requestSerializer.timeoutInterval = [MVVMHttp defaultMVVMHttp].timeoutInterval;
-    [[MVVMHttp defaultMVVMHttp].manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
+    [[SMKHttp defaultHttp].manager.requestSerializer willChangeValueForKey:@"timeoutInterval"];
+    [SMKHttp defaultHttp].manager.requestSerializer.timeoutInterval = [SMKHttp defaultHttp].timeoutInterval;
+    [[SMKHttp defaultHttp].manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     
     switch (requestType) {
-        case MVVMHttpRequestTypeGET: {
-            if ([MVVMHttpConfig sharedConfig].reachable) {
+        case SMKHttpRequestTypeGET: {
+            if ([SMKHttpConfig sharedConfig].reachable) {
                 // 2.发送请求
-                [[MVVMHttp defaultMVVMHttp].manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                [[SMKHttp defaultHttp].manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                     if (successHandler) {
-                        if (cachePolicy != MVVMHttpReturnDefault) {
+                        if (cachePolicy != SMKHttpReturnDefault) {
                             if (responseObject) {
-                                [[MVVMHttp defaultMVVMHttp].store db_putObject:responseObject withId:cacheKey intoTable:tableName];
+                                [[SMKHttp defaultHttp].store db_putObject:responseObject withId:cacheKey intoTable:tableName];
                             }
                         }
                         successHandler(responseObject);
@@ -342,18 +342,18 @@ cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy
             } else {
                 successHandler(nil);
                 failureHandler(nil);
-                [MVVMHttp showExceptionDialog];
+                [SMKHttp showExceptionDialog];
             }
             break;
         }
-        case MVVMHttpRequestTypePOST: {
-            if ([MVVMHttpConfig sharedConfig].reachable) {
+        case SMKHttpRequestTypePOST: {
+            if ([SMKHttpConfig sharedConfig].reachable) {
                 // 2.发送请求
-                [[MVVMHttp defaultMVVMHttp].manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                [[SMKHttp defaultHttp].manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                     if (successHandler) {
-                        if (cachePolicy != MVVMHttpReturnDefault) {
+                        if (cachePolicy != SMKHttpReturnDefault) {
                             if (responseObject) {
-                                [[MVVMHttp defaultMVVMHttp].store db_putObject:responseObject withId:cacheKey intoTable:tableName];
+                                [[SMKHttp defaultHttp].store db_putObject:responseObject withId:cacheKey intoTable:tableName];
                             }
                         }
                         successHandler(responseObject);
@@ -366,7 +366,7 @@ cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy
             } else {
                 successHandler(nil);
                 failureHandler(nil);
-                [MVVMHttp showExceptionDialog];
+                [SMKHttp showExceptionDialog];
             }
             
             break;
@@ -379,15 +379,15 @@ cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy
 // 弹出网络错误提示框
 + (void)showExceptionDialog
 {
-    if ([MVVMHttp defaultMVVMHttp].alert) {
+    if ([SMKHttp defaultHttp].alert) {
         return;
     }
-    [MVVMHttp defaultMVVMHttp].alert = [[UIAlertView alloc] initWithTitle:@"提示"
+    [SMKHttp defaultHttp].alert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                                   message:@"网络异常，请检查网络连接"
                                                                  delegate:self
                                                         cancelButtonTitle:@"好的"
                                                         otherButtonTitles:nil, nil];
-    [[MVVMHttp defaultMVVMHttp].alert show];
+    [[SMKHttp defaultHttp].alert show];
 }
 
 

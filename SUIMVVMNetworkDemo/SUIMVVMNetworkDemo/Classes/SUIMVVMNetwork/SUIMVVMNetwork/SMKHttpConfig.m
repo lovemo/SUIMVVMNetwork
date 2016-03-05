@@ -1,5 +1,5 @@
 //
-//  MVVMHttpConfig.m
+//  SMKHttpConfig.m
 //  SUIMVVMDemo
 //
 //  Created by yuantao on 16/3/2.
@@ -7,12 +7,12 @@
 //
 
 #import <SystemConfiguration/SystemConfiguration.h>
-#import "MVVMHttpConfig.h"
+#import "SMKHttpConfig.h"
 #include "netdb.h"
 
-@implementation MVVMHttpConfig
+@implementation SMKHttpConfig
 
-MVVMSingletonM(Config)
+SMKSingletonM(Config)
 
 // 查看网络状态是否给力
 - (BOOL)isConnectionAvailable

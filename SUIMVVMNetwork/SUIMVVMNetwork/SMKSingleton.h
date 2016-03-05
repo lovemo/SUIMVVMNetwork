@@ -1,10 +1,10 @@
 // .h文件
-#define MVVMSingletonH(name) + (instancetype)shared##name;
+#define SMKSingletonH(name) + (instancetype)shared##name;
 
 // .m文件
 #if __has_feature(objc_arc)
 
-    #define MVVMSingletonM(name) \
+    #define SMKSingletonM(name) \
     static id _instace; \
  \
     + (id)allocWithZone:(struct _NSZone *)zone \
@@ -32,7 +32,7 @@
 
 #else
 
-    #define MVVMSingletonM(name) \
+    #define SMKSingletonM(name) \
     static id _instace; \
  \
     + (id)allocWithZone:(struct _NSZone *)zone \
