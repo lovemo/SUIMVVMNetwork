@@ -12,9 +12,7 @@ pod 'SUIMVVMNetwork'
 
 ```objc
 
-@class MVVMHttpFileConfig;
-
-@interface MVVMHttp : NSObject
+@interface SMKHttp : NSObject
 
 /**
  *  请求超时时间
@@ -24,7 +22,7 @@ pod 'SUIMVVMNetwork'
 /**
  *  创建单例对象
  */
-+ (MVVMHttp *)defaultMVVMHttp;
++ (instancetype)defaultHttp;
 
 /**
  *  移除所有缓存
@@ -57,7 +55,7 @@ pod 'SUIMVVMNetwork'
  */
 + (void)get:(NSString *)url
      params:(NSDictionary *)params
-cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy
+cachePolicy:(SMKHttpRequestCachePolicy)cachePolicy
     success:(requestSuccessBlock)successHandler
     failure:(requestFailureBlock)failureHandler;
 
@@ -66,7 +64,7 @@ cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy
  */
 + (void)post:(NSString *)url
       params:(NSDictionary *)params
- cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy
+ cachePolicy:(SMKHttpRequestCachePolicy)cachePolicy
      success:(requestSuccessBlock)successHandler
      failure:(requestFailureBlock)failureHandler;
 
@@ -81,7 +79,7 @@ cachePolicy:(MVVMHttpRequestCachePolicy)cachePolicy
 /**
  *  DELETE请求
  */
-+ (void)delete:(NSString *)url
++ (void)deleteWithUrl:(NSString *)url
     params:(NSDictionary *)params
     success:(requestSuccessBlock)successHandler
     failure:(requestFailureBlock)failureHandler;
@@ -97,7 +95,7 @@ successAndProgress:(progressBlock)progressHandler
  *  文件上传
  */
 + (void)upload:(NSString *)url
-        params:(NSDictionary *)params fileConfig:(MVVMHttpFileConfig *)fileConfig
+        params:(NSDictionary *)params fileConfig:(SMKHttpFileConfig *)fileConfig
        success:(requestSuccessBlock)successHandler
        failure:(requestFailureBlock)failureHandler;
 
@@ -106,11 +104,10 @@ successAndProgress:(progressBlock)progressHandler
  */
 + (void)upload:(NSString *)url
         params:(NSDictionary *)params
-    fileConfig:(MVVMHttpFileConfig *)fileConfig
+    fileConfig:(SMKHttpFileConfig *)fileConfig
 successAndProgress:(progressBlock)progressHandler
       complete:(responseBlock)completionHandler;
 
 @end
-
 
 ```
