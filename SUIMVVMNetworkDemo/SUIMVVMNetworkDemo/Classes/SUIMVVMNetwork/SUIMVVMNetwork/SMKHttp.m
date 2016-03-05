@@ -8,7 +8,7 @@
 
 #import "SMKHttp.h"
 #import "AFNetworking.h"
-#import <SMKStorePublic.h>
+#import "SMKStorePublic.h"
 #import "SMKHttpConfig.h"
 
 #ifdef DEBUG
